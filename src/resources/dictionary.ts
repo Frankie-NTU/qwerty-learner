@@ -1,8 +1,7 @@
-import type { Dictionary, DictionaryResource } from '@/typings/index'
-import { calcChapterCount } from '@/utils'
+import type { DictionaryResource } from '@/typings/index'
 
-// 中国考试
-const chinaExam: DictionaryResource[] = [
+// 這裡定義你的私房詞庫
+const myCustomExam: DictionaryResource[] = [
   {
     id: 'my-custom-list',
     name: '我的私房詞庫',
@@ -13,7 +12,22 @@ const chinaExam: DictionaryResource[] = [
     length: 2,
     language: 'en',
     languageCategory: 'en',
-  }, // <--- 這個逗點一定要有，用來連接後面的 cet4
+  }
+]
+
+// 中国考试
+const chinaExam: DictionaryResource[] = [
+  {
+    id: 'cet4',
+    name: 'CET-4',
+    description: '大学英语四级词库',
+    category: '中国考试',
+    tags: ['大学英语'],
+    url: '/dicts/CET4_T.json',
+    length: 2607,
+    language: 'en',
+    languageCategory: 'en',
+  },
   {
     id: 'cet6',
     name: 'CET-6',
@@ -4189,11 +4203,22 @@ export const dictionaryResources: DictionaryResource[] = [
   // },
 ]
 
+// 新增這一段，把你的 myCustomExam 和原本的所有詞庫合併
+const dictionaryResources: DictionaryResource[] = [
+  ...myCustomExam, // 你的私房詞庫
+  ...chinaExam,
+  ...internationalExam,
+  ...childrenExam,
+  ...itaExam,
+  ...programmingExam,
+  ...commonExam,
+  ...proExam,
+]
+
 export const dictionaries: Dictionary[] = dictionaryResources.map((resource) => ({
   ...resource,
   chapterCount: calcChapterCount(resource.length),
 }))
-
 /**
  * An object-map from dictionary IDs to dictionary themselves.
  */

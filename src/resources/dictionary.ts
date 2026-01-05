@@ -4214,12 +4214,25 @@ const dictionaryResources: DictionaryResource[] = [
   ...commonExam,
   ...proExam,
 ]
+// 1. 建立一個安全的總清單 (只有存在的變數才會被加入)
+const allResources: DictionaryResource[] = [];
 
-export const dictionaries: Dictionary[] = dictionaryResources.map((resource) => ({
+// 加入你的私房詞庫 (確保前面有定義 myCustomExam)
+if (typeof myCustomExam !== 'undefined') allResources.push(...myCustomExam);
+
+// 依序加入原始詞庫 (如果變數存在才加入)
+if (typeof chinaExam !== 'undefined') allResources.push(...chinaExam);
+if (typeof internationalExam !== 'undefined') allResources.push(...internationalExam);
+
+// 2. 執行轉換
+export const dictionaries: Dictionary[] = allResources.map((resource) => ({
   ...resource,
   chapterCount: calcChapterCount(resource.length),
-}))
+}));
+
 /**
  * An object-map from dictionary IDs to dictionary themselves.
  */
-export const idDictionaryMap: Record<string, Dictionary> = Object.fromEntries(dictionaries.map((dict) => [dict.id, dict]))
+export const idDictionaryMap: Record<string, Dictionary> = Object.fromEntries(
+  dictionaries.map((dict) => [dict.id, dict])
+);

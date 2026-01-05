@@ -4,16 +4,16 @@ import { calcChapterCount } from '@/utils'
 // 中国考试
 const chinaExam: DictionaryResource[] = [
   {
-    id: 'cet4',
-    name: 'CET-4',
-    description: '大学英语四级词库',
-    category: '中国考试',
-    tags: ['大学英语'],
-    url: '/dicts/CET4_T.json',
-    length: 2607,
+    id: 'my-custom-list',
+    name: '我的私房詞庫',
+    description: '這是我自己上傳的單字表',
+    category: '自定義',
+    tags: ['個人'],
+    url: '/dicts/my-list.json',
+    length: 2,
     language: 'en',
     languageCategory: 'en',
-  },
+  }, // <--- 這個逗點一定要有，用來連接後面的 cet4
   {
     id: 'cet6',
     name: 'CET-6',

@@ -1,12 +1,13 @@
-import type { DictionaryResource } from '@/typings/index'
+import type { Dictionary, DictionaryResource } from '@/typings/index'
+import { calcChapterCount } from '@/utils'
 
-// 這裡定義你的私房詞庫
+// --- 這裡放你的私房詞庫 ---
 const myCustomExam: DictionaryResource[] = [
   {
     id: 'my-custom-list',
     name: '我的私房詞庫',
     description: '這是我自己上傳的單字表',
-    category: '自定義',
+    category: '中国考试', // 這裡改成 '中国考试' 確保它會出現在第一個分類裡
     tags: ['個人'],
     url: '/dicts/my-list.json',
     length: 2,
@@ -14,6 +15,8 @@ const myCustomExam: DictionaryResource[] = [
     languageCategory: 'en',
   }
 ]
+
+// --- 下面接著你原本那一大堆 chinaExam, internationalExam 的內容 ---
 
 // 中国考试
 const chinaExam: DictionaryResource[] = [
@@ -4171,12 +4174,13 @@ const indonesianDicts: DictionaryResource[] = [
 
 // --- 合併與導出 ---
 
+// --- 這是整個檔案的結尾，請確保下面這段只出現一次 ---
+
 export const dictionaryResources: DictionaryResource[] = [
   ...myCustomExam,
   ...chinaExam,
   ...internationalExam,
   ...indonesianDicts,
-  // 注意：如果你檔案中間還有定義 childrenEnglish 等變數，記得要在這裡 ... 展開
 ]
 
 export const dictionaries: Dictionary[] = dictionaryResources.map((resource) => ({

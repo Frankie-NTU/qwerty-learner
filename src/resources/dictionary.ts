@@ -4169,31 +4169,21 @@ const indonesianDicts: DictionaryResource[] = [
   },
 ]
 
-// --- 所有的詞庫變數定義完後，在這裡統一合併 ---
+// --- 合併與導出 ---
 
-/**
- * 這裡將你的私房詞庫與所有原始詞庫合併
- * 注意：請確保 ... 後面的變數名稱與你檔案上方定義的一致
- */
-const finalResources: DictionaryResource[] = [
-  ...myCustomExam,      // 你的私房詞庫放在最前面
+export const dictionaryResources: DictionaryResource[] = [
+  ...myCustomExam,
   ...chinaExam,
   ...internationalExam,
   ...indonesianDicts,
-  // 如果你上方還有定義 childrenEnglish, programming 等，請在這裡繼續補上
+  // 注意：如果你檔案中間還有定義 childrenEnglish 等變數，記得要在這裡 ... 展開
 ]
 
-/**
- * 轉換為系統使用的格式並導出
- */
-export const dictionaries: Dictionary[] = finalResources.map((resource) => ({
+export const dictionaries: Dictionary[] = dictionaryResources.map((resource) => ({
   ...resource,
   chapterCount: calcChapterCount(resource.length),
 }))
 
-/**
- * 建立 ID 映射表
- */
 export const idDictionaryMap: Record<string, Dictionary> = Object.fromEntries(
   dictionaries.map((dict) => [dict.id, dict])
 )

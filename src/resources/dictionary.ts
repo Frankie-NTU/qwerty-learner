@@ -4177,12 +4177,13 @@ const indonesianDicts: DictionaryResource[] = [
 // --- 這是整個檔案的結尾，請確保下面這段只出現一次 ---
 
 export const dictionaryResources: DictionaryResource[] = [
-  ...myCustomExam,
+  ...myCustomExam,      // 檢查有沒有這行，這行沒寫就看不到
   ...chinaExam,
   ...internationalExam,
   ...indonesianDicts,
 ]
 
+// 下面這兩段也要有，且只能出現一次
 export const dictionaries: Dictionary[] = dictionaryResources.map((resource) => ({
   ...resource,
   chapterCount: calcChapterCount(resource.length),

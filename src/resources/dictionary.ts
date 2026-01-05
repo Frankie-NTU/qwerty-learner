@@ -4,6 +4,17 @@ import { calcChapterCount } from '@/utils'
 // 中国考试
 const chinaExam: DictionaryResource[] = [
   {
+    id: 'my-custom-list',
+    name: '我的私房詞庫',
+    description: '這是我自己上傳的單字表',
+    category: '自定義',
+    tags: ['個人'],
+    url: '/dicts/my-list.json',
+    length: 2, // 這裡填你 JSON 裡的單字數量
+    language: 'en',
+    languageCategory: 'en',
+  },
+  {
     id: 'cet4',
     name: 'CET-4',
     description: '大学英语四级词库',

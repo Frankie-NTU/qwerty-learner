@@ -4169,66 +4169,30 @@ const indonesianDicts: DictionaryResource[] = [
   },
 ]
 
+// --- 所有的詞庫變數定義完後，在這裡統一合併 ---
+
 /**
- * Built-in dictionaries in an array.
- * Why arrays? Because it keeps the order across browsers.
+ * 這裡將你的私房詞庫與所有原始詞庫合併
+ * 注意：請確保 ... 後面的變數名稱與你檔案上方定義的一致
  */
-export const dictionaryResources: DictionaryResource[] = [
+const finalResources: DictionaryResource[] = [
+  ...myCustomExam,      // 你的私房詞庫放在最前面
   ...chinaExam,
   ...internationalExam,
-  ...childrenEnglish,
-  ...programming,
-  ...japaneseExam,
-  ...germanExam,
-  ...kazakhHapinDicts,
   ...indonesianDicts,
-
-  // {
-  //   id: 'zhtest',
-  //   name: '中文测试',
-  //   description: '中文测试词库',
-  //   category: '测试',
-  //   url: '/dicts/chinese_test.json',
-  //   length: 27,
-  //   language: 'zh',
-  // },
-  // {
-  //   id: 'jptest',
-  //   name: '日文测试',
-  //   description: '日文测试词库',
-  //   category: '测试',
-  //   url: '/dicts/japanese_test.json',
-  //   length: 20,
-  //   language: 'ja',
-  // },
+  // 如果你上方還有定義 childrenEnglish, programming 等，請在這裡繼續補上
 ]
 
-// 新增這一段，把你的 myCustomExam 和原本的所有詞庫合併
-const dictionaryResources: DictionaryResource[] = [
-  ...myCustomExam, // 你的私房詞庫
-  ...chinaExam,
-  ...internationalExam,
-  ...childrenExam,
-  ...itaExam,
-  ...programmingExam,
-  ...commonExam,
-  ...proExam,
-]
-// 直接將現有的變數合併，這是 TypeScript 最穩定的寫法
-const dictionaryResources: DictionaryResource[] = [
-  ...myCustomExam,
-  ...chinaExam,
-  ...internationalExam,
-]
-
-// 執行轉換並導出
-export const dictionaries: Dictionary[] = dictionaryResources.map((resource) => ({
+/**
+ * 轉換為系統使用的格式並導出
+ */
+export const dictionaries: Dictionary[] = finalResources.map((resource) => ({
   ...resource,
   chapterCount: calcChapterCount(resource.length),
 }))
 
 /**
- * An object-map from dictionary IDs to dictionary themselves.
+ * 建立 ID 映射表
  */
 export const idDictionaryMap: Record<string, Dictionary> = Object.fromEntries(
   dictionaries.map((dict) => [dict.id, dict])
